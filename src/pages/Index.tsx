@@ -130,7 +130,6 @@ const Index = () => {
     setSubscribing(true);
 
     try {
-      // Check if email already exists
       const { data: existing } = await supabase
         .from("subscribers")
         .select("id")
@@ -147,7 +146,6 @@ const Index = () => {
         return;
       }
 
-      // Insert new subscriber
       const { error } = await supabase
         .from("subscribers")
         .insert([{ 
@@ -188,6 +186,7 @@ const Index = () => {
 
   const formattedArticles = visibleArticles.map(article => ({
     id: article.id,
+    slug: article.slug,
     icon: article.icon,
     title: article.title,
     date: new Date(article.created_at).toLocaleDateString('en-US', { 
@@ -202,10 +201,10 @@ const Index = () => {
   return (
     <>
       <SEOHead 
-        title="Rarible Insights - Smart Lifestyle, Relocation & Tax Decisions"
-        description="Expert insights on digital nomad lifestyle, geopolitics, treasury strategies, and solopreneur success. Join 1,851+ readers making smarter decisions."
-        keywords="digital nomads, geopolitics, treasury desk, solopreneur, relocation, tax optimization, lifestyle design, remote work, financial freedom, AI search optimization"
-        url="https://your-domain.com"
+        title="Rarible Insights - Digital Nomad Relocation & Lifestyle Guides"
+        description="Expert insights on digital nomad relocation, visa requirements, tax optimization, and lifestyle design. Join 1,851+ readers making smarter decisions."
+        keywords="digital nomad relocation, visa requirements, tax optimization, remote work, lifestyle design, expat guide, nomad checklist, relocation services"
+        url="https://www.rariblenomads.info"
       />
       <OrganizationSchema />
       <WebsiteSchema />

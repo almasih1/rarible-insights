@@ -20,11 +20,13 @@ import { supabase } from "@/lib/supabaseClient";
 
 interface Article {
   id: string;
+  slug: string;
   title: string;
   content: string;
   icon: string;
   read_time: number;
   created_at: string;
+  updated_at: string;
   category?: {
     name: string;
     color: string;
@@ -43,17 +45,16 @@ interface Article {
 }
 
 const Article = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<Article | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id) {
+    if (slug) {
       fetchArticle();
-      incrementViews();
     }
-  }, [id]);
+  }, [slug]);
 
   const fetchArticle = async () => {
     try {
@@ -65,7 +66,7 @@ const Article = () => {
           author:authors(name, twitter_url, instagram_url, youtube_url, linkedin_url),
           summary_points:article_summary_points(point_text, order_index)
         `)
-        .eq("id", id)
+        .eq("slug", slug)
         .eq("status", "published")
         .single();
 
@@ -73,12 +74,18 @@ const Article = () => {
 
       setArticle(data);
 
-      // Fetch related articles (same category, different article)
+      // Increment views
+      if (data.id) {
+        await supabase.rpc("increment_article_views", { article_id: data.id });
+      }
+
+      // Fetch related articles
       if (data.category_id) {
         const { data: related } = await supabase
           .from("articles")
           .select(`
             id,
+            slug,
             title,
             icon,
             created_at,
@@ -86,7 +93,7 @@ const Article = () => {
           `)
           .eq("category_id", data.category_id)
           .eq("status", "published")
-          .neq("id", id)
+          .neq("id", data.id)
           .limit(4);
 
         if (related) setRelatedArticles(related);
@@ -95,15 +102,6 @@ const Article = () => {
       console.error("Error fetching article:", error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const incrementViews = async () => {
-    try {
-      // Increment view count
-      await supabase.rpc("increment_article_views", { article_id: id });
-    } catch (error) {
-      console.error("Error incrementing views:", error);
     }
   };
 
@@ -149,13 +147,16 @@ const Article = () => {
     (a, b) => a.order_index - b.order_index
   );
 
+  // Canonical URL - CRITICAL for SEO
+  const canonicalUrl = `https://www.rariblenomads.info/digital-nomad-relocation/${article.slug}`;
+
   return (
     <>
       <SEOHead 
         title={`${article.title} | Rarible Insights`}
         description={article.summary_points?.map(p => p.point_text).join(". ") || article.title}
         keywords={`${article.category?.name}, ${article.title}, digital nomads, relocation, lifestyle`}
-        url={`https://your-domain.com/article/${article.id}`}
+        url={canonicalUrl}
         article={true}
         author={article.author?.name}
         publishedTime={article.created_at}
@@ -165,18 +166,19 @@ const Article = () => {
       <ArticleSchema 
         title={article.title}
         description={article.summary_points?.map(p => p.point_text).join(". ") || article.title}
-        image="https://your-domain.com/og-image.jpg"
+        image="https://www.rariblenomads.info/og-image.jpg"
         author={article.author?.name || "Rarible Insights"}
         publishedTime={article.created_at}
+        modifiedTime={article.updated_at}
         category={article.category?.name || "Uncategorized"}
-        url={`https://your-domain.com/article/${article.id}`}
+        url={canonicalUrl}
       />
       
       <BreadcrumbSchema 
         items={[
-          { name: "Home", url: "https://your-domain.com" },
-          { name: article.category?.name || "Articles", url: "https://your-domain.com" },
-          { name: article.title, url: `https://your-domain.com/article/${article.id}` }
+          { name: "Home", url: "https://www.rariblenomads.info" },
+          { name: "Digital Nomad Relocation", url: "https://www.rariblenomads.info/digital-nomad-relocation" },
+          { name: article.title, url: canonicalUrl }
         ]}
       />
       
@@ -202,7 +204,13 @@ const Article = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>{article.category?.name || "Article"}</BreadcrumbPage>
+              <BreadcrumbLink asChild>
+                <Link to="/digital-nomad-relocation">Digital Nomad Relocation</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{article.title}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -353,7 +361,7 @@ const Article = () => {
                 {relatedArticles.map((related) => (
                   <Link
                     key={related.id}
-                    to={`/article/${related.id}`}
+                    to={`/digital-nomad-relocation/${related.slug}`}
                     className="group border border-border/30 rounded-lg p-4 hover:border-border hover:shadow-sm transition-all"
                   >
                     <div className="flex items-start gap-3">

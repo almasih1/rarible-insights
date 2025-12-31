@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 interface ArticleCardProps {
   id: string;
+  slug?: string;
   title: string;
   date: string;
   category: string;
@@ -12,14 +13,18 @@ interface ArticleCardProps {
 
 const ArticleCard = ({ 
   id,
+  slug,
   title, 
   date, 
   category, 
   categoryColor, 
   icon = "📄"
 }: ArticleCardProps) => {
+  // Use slug if available, fallback to id for backwards compatibility
+  const articlePath = slug || id;
+  
   return (
-    <Link to={`/article/${id}`}>
+    <Link to={`/article/${articlePath}`}>
       <article className="bg-card border border-border/40 rounded-xl p-4 hover:shadow-md transition-all cursor-pointer group">
         {/* Icon and Title */}
         <div className="flex items-start gap-3 mb-4">
