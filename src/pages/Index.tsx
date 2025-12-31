@@ -48,6 +48,21 @@ const Index = () => {
   const [subscriberCount, setSubscriberCount] = useState(1851);
   const [displayCount, setDisplayCount] = useState(1851);
 
+  // Static articles (not in DB)
+  const staticArticles = [
+    {
+      id: 'static-relocation-checklist',
+      slug: 'relocation-checklist-digital-nomads',
+      icon: '🗺️',
+      title: 'Relocation Checklist for Digital Nomads',
+      created_at: '2025-12-31T00:00:00Z',
+      category: {
+        name: 'Digital Nomads',
+        color: 'bg-green-50 text-green-700 border-green-200',
+      },
+    },
+  ];
+
   useEffect(() => {
     fetchArticles();
     fetchAds();
@@ -203,8 +218,8 @@ const Index = () => {
   };
 
   const filteredArticles = selectedCategory 
-    ? articles.filter((a) => a.category?.name === selectedCategory) 
-    : articles;
+    ? [...staticArticles, ...articles].filter((a) => a.category?.name === selectedCategory) 
+    : [...staticArticles, ...articles];
     
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const hasMore = visibleCount < filteredArticles.length;

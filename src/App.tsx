@@ -51,7 +51,7 @@ const App = () => (
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
           {/* Footer Guide Pages */}
-          <Route path="/digital-nomad-relocation/relocation-checklist" element={<RelocationChecklist />} />
+          <Route path="/digital-nomad-relocation/relocation-checklist-digital-nomads" element={<RelocationChecklist />} />
           <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
           <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
           <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />
