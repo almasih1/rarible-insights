@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-
 import Index from "./pages/Index";
 import Article from "./pages/Article";
 import DigitalNomadHub from "./pages/DigitalNomadHub";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Disclaimer from "./pages/Disclaimer";
+import EditorialPolicy from "./pages/EditorialPolicy";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -34,9 +39,17 @@ const App = () => (
           <Route path="/digital-nomad-relocation" element={<DigitalNomadHub />} />
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
+          {/* Base Pages */}
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/editorial-policy" element={<EditorialPolicy />} />
+          
           {/* 301 Redirect from old URL structure */}
           <Route path="/article/:slug" element={<ArticleRedirect />} />
           
+          {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/articles/new" element={<ArticleEditor />} />
@@ -45,6 +58,7 @@ const App = () => (
           <Route path="/admin/categories" element={<CategoriesManager />} />
           <Route path="/admin/authors" element={<AuthorsManager />} />
           <Route path="/admin/subscribers" element={<SubscribersManager />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
