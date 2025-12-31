@@ -2,9 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import Index from "./pages/Index";
 import Article from "./pages/Article";
+import DigitalNomadHub from "./pages/DigitalNomadHub";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -16,6 +17,12 @@ import SubscribersManager from "./pages/SubscribersManager";
 
 const queryClient = new QueryClient();
 
+// 301 Redirect component for old URLs
+const ArticleRedirect = () => {
+  const { slug } = useParams<{ slug: string }>();
+  return <Navigate to={`/digital-nomad-relocation/${slug}`} replace />;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -24,13 +31,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/digital-nomad-relocation" element={<DigitalNomadHub />} />
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
           {/* 301 Redirect from old URL structure */}
-          <Route 
-            path="/article/:slug" 
-            element={<Navigate to="/digital-nomad-relocation/:slug" replace />} 
-          />
+          <Route path="/article/:slug" element={<ArticleRedirect />} />
           
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
