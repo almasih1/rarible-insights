@@ -45,10 +45,13 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [leftAds, setLeftAds] = useState<Ad[]>([]);
   const [rightAds, setRightAds] = useState<Ad[]>([]);
+  const [subscriberCount, setSubscriberCount] = useState(1851);
+  const [displayCount, setDisplayCount] = useState(1851);
 
   useEffect(() => {
     fetchArticles();
     fetchAds();
+    fetchSubscriberCount();
   }, []);
 
   const fetchArticles = async () => {
@@ -100,6 +103,33 @@ const Index = () => {
       console.error("Error fetching ads:", error);
     }
   };
+
+  const fetchSubscriberCount = async () => {
+    try {
+      const { count, error } = await supabase
+        .from("subscribers")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "active");
+
+      if (error) throw error;
+      const total = 1851 + (count || 0);
+      setSubscriberCount(total);
+    } catch (error) {
+      console.error("Error fetching subscriber count:", error);
+    }
+  };
+
+  // Animate counter smoothly
+  useEffect(() => {
+    if (displayCount === subscriberCount) return;
+    
+    const increment = subscriberCount > displayCount ? 1 : -1;
+    const timer = setTimeout(() => {
+      setDisplayCount((prev) => prev + increment);
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, [displayCount, subscriberCount]);
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -157,7 +187,7 @@ const Index = () => {
 
       toast({
         title: "Success! 🎉",
-        description: "You've been subscribed to Rarible Insights!",
+        description: "You've been subscribed to Rarible Nomads!",
       });
       setEmail("");
     } catch (error: any) {
@@ -201,9 +231,9 @@ const Index = () => {
   return (
     <>
       <SEOHead 
-        title="Rarible Insights - Digital Nomad Relocation & Lifestyle Guides"
-        description="Expert insights on digital nomad relocation, visa requirements, tax optimization, and lifestyle design. Join 1,851+ readers making smarter decisions."
-        keywords="digital nomad relocation, visa requirements, tax optimization, remote work, lifestyle design, expat guide, nomad checklist, relocation services"
+        title="Rarible Nomads - Digital Nomad Relocation & International Living"
+        description="Independent insights on digital nomad relocation, visa requirements, tax optimization, and international living. Join 1,800+ readers making smarter decisions."
+        keywords="digital nomad relocation, visa requirements, tax optimization, remote work, international living, expat guide, nomad checklist, relocation services"
         url="https://www.rariblenomads.info"
       />
       <OrganizationSchema />
@@ -237,18 +267,25 @@ const Index = () => {
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4 leading-tight text-foreground">
-                rarible{" "}
+                Rarible{" "}
                 <span className="relative inline-block z-0">
                   <span
                     className="absolute bottom-0 left-0 right-0 h-[45%] bg-orange-200/70"
                     style={{ zIndex: -1 }}
                   ></span>
-                  <span className="relative z-10">insights</span>
+                  <span className="relative z-10">Nomads</span>
                 </span>
               </h1>
 
+              <p className="text-muted-foreground mb-2">
+                Independent insights on digital nomad relocation and international living.
+              </p>
               <p className="text-muted-foreground mb-8">
-                How to make smarter lifestyle, relocation, and tax decisions. Join 1,851 readers.
+                Join{" "}
+                <span className="font-semibold text-foreground tabular-nums">
+                  {displayCount.toLocaleString()}
+                </span>{" "}
+                readers.
               </p>
 
               <form onSubmit={handleSubscribe} className="flex items-center justify-center gap-3 max-w-xl mx-auto">
