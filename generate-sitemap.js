@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 
 const supabaseUrl = 'https://mdobvixpxroyivxfjbas.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1kb2J2aXhweHJveWl2eGZqYmFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUzMTAwNzIsImV4cCI6MjA1MDg4NjA3Mn0.TL1LvYOET_ZGMm2d1d9b-kHpS8VjX1Y0VRFjLuqWils';
+const supabaseKey = 'sb_publishable_8xhMc2z_VXn6nJbWvxDB-g_6KhJnlNa';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -33,7 +33,7 @@ async function generateSitemap() {
     <priority>1.0</priority>
   </url>
   
-  <!-- Digital Nomad Relocation Hub (if exists) -->
+  <!-- Digital Nomad Relocation Hub -->
   <url>
     <loc>https://www.rariblenomads.info/digital-nomad-relocation/</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
