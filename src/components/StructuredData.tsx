@@ -28,15 +28,16 @@ export const ArticleSchema = ({
     description: description,
     image: image,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: author,
+      url: "https://www.rariblenomads.info/about"
     },
     publisher: {
       "@type": "Organization",
-      name: "Rarible Insights",
+      name: "Rarible Nomads",
       logo: {
         "@type": "ImageObject",
-        url: "https://your-domain.com/logo.png",
+        url: "https://www.rariblenomads.info/logo.png",
       },
     },
     datePublished: publishedTime,
@@ -59,18 +60,14 @@ export const OrganizationSchema = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Rarible Insights",
-    url: "https://your-domain.com",
-    logo: "https://your-domain.com/logo.png",
-    description: "Expert insights on digital nomad lifestyle, geopolitics, treasury strategies, and solopreneur success.",
-    sameAs: [
-      "https://twitter.com/raribleinsights",
-      "https://linkedin.com/company/raribleinsights",
-    ],
+    name: "Rarible Nomads",
+    url: "https://www.rariblenomads.info",
+    logo: "https://www.rariblenomads.info/logo.png",
+    description: "Independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
-      email: "hello@rarible-insights.com",
+      email: "contact@rariblenomads.info",
     },
   };
 
@@ -85,12 +82,12 @@ export const WebsiteSchema = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Rarible Insights",
-    url: "https://your-domain.com",
-    description: "Expert insights on digital nomad lifestyle, geopolitics, treasury strategies, and solopreneur success.",
+    name: "Rarible Nomads",
+    url: "https://www.rariblenomads.info",
+    description: "Independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://your-domain.com/search?q={search_term_string}",
+      target: "https://www.rariblenomads.info/search?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
