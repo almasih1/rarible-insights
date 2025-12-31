@@ -1,60 +1,193 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="border-t border-border/40 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Navigation */}
+    <footer className="border-t border-border/30 bg-background">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Footer Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {/* Column 1 - Digital Nomad Relocation */}
           <div>
-            <h3 className="font-serif text-base font-medium mb-4">Navigation</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Dashboard</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Search</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Stats</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Olympics</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Categories</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Recently Added</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Top 100 Startups</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Newsletter</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Buy/Sell Startups</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">$1 vs $1,000,000 Startup</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Open Revenue</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Terms of service</a></li>
+            <h3 className="font-semibold text-foreground mb-4">Digital Nomad Relocation</h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-checklist"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Relocation Checklist
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/documents-needed"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Documents for Digital Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/digital-nomad-visas"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Digital Nomad Visas (by Country)
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-timeline"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Relocation Timeline
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-cost"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Cost of Relocation Abroad
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Browse startups */}
+          {/* Column 2 - Guides & Resources */}
           <div>
-            <h3 className="font-serif text-base font-medium mb-4">Browse startups</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Artificial Intelligence</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">SaaS</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Developer Tools</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Fintech</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Marketing</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">E-commerce</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Productivity</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Design Tools</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">No-Code</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Analytics</a></li>
+            <h3 className="font-semibold text-foreground mb-4">Guides & Resources</h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/country-guides"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Country Relocation Guides
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/nomad-taxes"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Taxes for Digital Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/healthcare-insurance"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Healthcare & Insurance Abroad
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/banking-abroad"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Banking & Payments for Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-mistakes"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Common Relocation Mistakes
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* From the maker */}
+          {/* Column 3 - About Rarible Nomads */}
           <div>
-            <h3 className="font-serif text-base font-medium mb-4">From the maker of TrustMRR</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Newsletter for entrepreneurs</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">CodeFast</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">ShipFast</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">DataFast</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">ByeDispute</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">IndiePage</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">ZenVoice</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">GamifyList</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">WorkbookPDF</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">HabitsGarden</a></li>
+            <h3 className="font-semibold text-foreground mb-4">About Rarible Nomads</h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link 
+                  to="/about"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/editorial-policy"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Editorial Policy
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/contact"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/privacy-policy"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/disclaimer"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Disclaimer
+                </Link>
+              </li>
             </ul>
           </div>
+
+          {/* Column 4 - Stay Updated */}
+          <div>
+            <h3 className="font-semibold text-foreground mb-4">Stay Updated</h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link 
+                  to="/newsletter"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Newsletter for Digital Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Latest Relocation Guides
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Updates & New Articles
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Footer Bottom */}
+        <div className="pt-8 border-t border-border/30">
+          <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
+            Rarible Nomads is an independent information platform with guides, checklists, and insights 
+            to help digital nomads understand relocation, visas, taxes, and life abroad.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            © 2025 Rarible Nomads. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
