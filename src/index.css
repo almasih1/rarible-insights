@@ -159,3 +159,193 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Article Content Styles - Tables, CTA, Highlights */
+@layer components {
+  /* Beautiful Tables - Pastel Style */
+  .article-content table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid #f3f4f6;
+  }
+
+  .article-content thead {
+    background: #fef3e2;
+  }
+
+  .article-content thead th {
+    color: #1a1a1a;
+    font-weight: 600;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 0.9rem;
+    letter-spacing: 0.2px;
+    border-bottom: 2px solid #f9d9aa;
+  }
+
+  .article-content tbody tr {
+    background: #fffbf5;
+    border-bottom: 1px solid #f9f5f0;
+  }
+
+  .article-content tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .article-content tbody tr:hover {
+    background: #fef9f3;
+  }
+
+  .article-content tbody td {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+    color: #374151;
+  }
+
+  .article-content tbody td:first-child {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  /* Cost table style - Soft Peach */
+  .article-content .cost-table thead {
+    background: #ffe8e8;
+  }
+
+  .article-content .cost-table thead th {
+    border-bottom: 2px solid #ffc9c9;
+  }
+
+  .article-content .cost-table tbody tr {
+    background: #fff5f5;
+  }
+
+  .article-content .cost-table tbody tr:hover {
+    background: #fff0f0;
+  }
+
+  /* Document table style - Soft Mint */
+  .article-content .docs-table thead {
+    background: #e8f5f1;
+  }
+
+  .article-content .docs-table thead th {
+    border-bottom: 2px solid #b8e6d5;
+  }
+
+  .article-content .docs-table tbody tr {
+    background: #f5faf8;
+  }
+
+  .article-content .docs-table tbody tr:hover {
+    background: #f0f7f4;
+  }
+
+  /* Highlight boxes */
+  .article-content .highlight {
+    background: #fef3e2;
+    border-left: 4px solid #f9d9aa;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+
+  .article-content .highlight p {
+    margin: 0;
+  }
+
+  /* CTA Box - Pastel Style */
+  .article-content .cta-box {
+    background: #fef3e2;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    margin: 3rem 0;
+    text-align: center;
+    border: 2px solid #f9d9aa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .article-content .cta-box h2 {
+    color: #1a1a1a;
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content .cta-box p {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .article-content .cta-button {
+    display: inline-block;
+    background: #1a1a1a;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .article-content .cta-button:hover {
+    background: #2d2d2d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* Article typography */
+  .article-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .article-content h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .article-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .article-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .article-content strong {
+    font-weight: 600;
+  }
+
+  .article-content em {
+    font-style: italic;
+  }
+}
