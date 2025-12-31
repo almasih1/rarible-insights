@@ -11,6 +11,17 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Disclaimer from "./pages/Disclaimer";
 import EditorialPolicy from "./pages/EditorialPolicy";
+import Newsletter from "./pages/Newsletter";
+import RelocationChecklist from "./pages/RelocationChecklist";
+import DocumentsNeeded from "./pages/DocumentsNeeded";
+import DigitalNomadVisas from "./pages/DigitalNomadVisas";
+import RelocationTimeline from "./pages/RelocationTimeline";
+import RelocationCost from "./pages/RelocationCost";
+import CountryGuides from "./pages/CountryGuides";
+import NomadTaxes from "./pages/NomadTaxes";
+import HealthcareInsurance from "./pages/HealthcareInsurance";
+import BankingAbroad from "./pages/BankingAbroad";
+import RelocationMistakes from "./pages/RelocationMistakes";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -39,12 +50,25 @@ const App = () => (
           <Route path="/digital-nomad-relocation" element={<DigitalNomadHub />} />
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
+          {/* Footer Guide Pages */}
+          <Route path="/digital-nomad-relocation/relocation-checklist" element={<RelocationChecklist />} />
+          <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
+          <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
+          <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />
+          <Route path="/digital-nomad-relocation/relocation-cost" element={<RelocationCost />} />
+          <Route path="/digital-nomad-relocation/country-guides" element={<CountryGuides />} />
+          <Route path="/digital-nomad-relocation/nomad-taxes" element={<NomadTaxes />} />
+          <Route path="/digital-nomad-relocation/healthcare-insurance" element={<HealthcareInsurance />} />
+          <Route path="/digital-nomad-relocation/banking-abroad" element={<BankingAbroad />} />
+          <Route path="/digital-nomad-relocation/relocation-mistakes" element={<RelocationMistakes />} />
+          
           {/* Base Pages */}
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/editorial-policy" element={<EditorialPolicy />} />
+          <Route path="/newsletter" element={<Newsletter />} />
           
           {/* 301 Redirect from old URL structure */}
           <Route path="/article/:slug" element={<ArticleRedirect />} />
