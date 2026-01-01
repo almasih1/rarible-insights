@@ -52,6 +52,8 @@ const App = () => (
           
           {/* Footer Guide Pages */}
           <Route path="/digital-nomad-relocation/relocation-checklist-digital-nomads" element={<RelocationChecklist />} />
+          {/* 301 Redirect from old footer URL */}
+          <Route path="/digital-nomad-relocation/relocation-checklist" element={<Navigate to="/digital-nomad-relocation/relocation-checklist-digital-nomads" replace />} />
           <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
           <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
           <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />
