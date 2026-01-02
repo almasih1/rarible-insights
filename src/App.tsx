@@ -6,13 +6,13 @@ import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-
 import Index from "./pages/Index";
 import Article from "./pages/Article";
 import DigitalNomadHub from "./pages/DigitalNomadHub";
+import CategoryPage from "./pages/CategoryPage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Disclaimer from "./pages/Disclaimer";
 import EditorialPolicy from "./pages/EditorialPolicy";
 import Newsletter from "./pages/Newsletter";
-import RelocationChecklist from "./pages/RelocationChecklist";
 import DocumentsNeeded from "./pages/DocumentsNeeded";
 import DigitalNomadVisas from "./pages/DigitalNomadVisas";
 import RelocationTimeline from "./pages/RelocationTimeline";
@@ -48,12 +48,17 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/digital-nomad-relocation" element={<DigitalNomadHub />} />
+          
+          {/* SEO Category Pages - MUST BE BEFORE :slug route */}
+          <Route path="/digital-nomad-relocation/category/:slug" element={<CategoryPage />} />
+          
+          {/* Article Pages */}
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
-          {/* Footer Guide Pages */}
-          <Route path="/digital-nomad-relocation/relocation-checklist-digital-nomads" element={<RelocationChecklist />} />
-          {/* 301 Redirect from old footer URL */}
+          {/* 301 Redirect for old relocation-checklist URL */}
           <Route path="/digital-nomad-relocation/relocation-checklist" element={<Navigate to="/digital-nomad-relocation/relocation-checklist-digital-nomads" replace />} />
+          
+          {/* Footer Guide Pages (Static) */}
           <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
           <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
           <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />

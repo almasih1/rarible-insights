@@ -21,33 +21,36 @@ interface Article {
   };
 }
 
+interface SeoCategory {
+  id: string;
+  slug: string;
+  title: string;
+  order_index: number;
+}
+
 const DigitalNomadHub = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [seoCategories, setSeoCategories] = useState<SeoCategory[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Static articles (not in DB)
-  const staticArticles: Article[] = [
-    {
-      id: 'static-relocation-checklist',
-      slug: 'relocation-checklist-digital-nomads',
-      title: 'Relocation Checklist for Digital Nomads',
-      icon: '🗺️',
-      read_time: 6,
-      created_at: '2025-12-31T00:00:00Z',
-      category: {
-        name: 'Digital Nomads',
-        color: 'bg-green-50 text-green-700 border-green-200',
-      },
-    },
-  ];
-
   useEffect(() => {
-    fetchArticles();
+    fetchData();
   }, []);
 
-  const fetchArticles = async () => {
+  const fetchData = async () => {
     try {
-      const { data, error } = await supabase
+      // Fetch SEO categories
+      const { data: categoriesData, error: categoriesError } = await supabase
+        .from("seo_categories")
+        .select("id, slug, title, order_index")
+        .eq("is_active", true)
+        .order("order_index");
+
+      if (categoriesError) throw categoriesError;
+      setSeoCategories(categoriesData || []);
+
+      // Fetch articles
+      const { data: articlesData, error: articlesError } = await supabase
         .from("articles")
         .select(`
           id,
@@ -61,17 +64,14 @@ const DigitalNomadHub = () => {
         .eq("status", "published")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
-      setArticles(data || []);
+      if (articlesError) throw articlesError;
+      setArticles(articlesData || []);
     } catch (error) {
-      console.error("Error fetching articles:", error);
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
   };
-
-  // Combine static and DB articles
-  const allArticles = [...staticArticles, ...articles];
 
   return (
     <>
@@ -113,19 +113,46 @@ const DigitalNomadHub = () => {
           </p>
         </section>
 
+        {/* SEO Categories Section */}
+        <section className="max-w-4xl mx-auto px-4 pb-8">
+          <h2 className="text-2xl font-bold text-foreground mb-6">Browse by Topic</h2>
+          
+          {loading ? (
+            <div className="text-center py-8">
+              <p className="text-muted-foreground">Loading categories...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {seoCategories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/digital-nomad-relocation/category/${category.slug}`}
+                  className="block border border-border/30 rounded-lg p-5 hover:border-border hover:shadow-md transition-all"
+                >
+                  <h3 className="text-lg font-semibold text-foreground hover:text-foreground/80 transition-colors">
+                    {category.title}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+
         {/* Articles Section */}
         <section className="max-w-4xl mx-auto px-4 pb-16">
+          <h2 className="text-2xl font-bold text-foreground mb-6">Latest Articles</h2>
+          
           {loading ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">Loading articles...</p>
             </div>
-          ) : allArticles.length === 0 ? (
+          ) : articles.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No articles yet. Check back soon!</p>
             </div>
           ) : (
             <div className="space-y-6">
-              {allArticles.map((article) => (
+              {articles.map((article) => (
                 <Link
                   key={article.id}
                   to={`/digital-nomad-relocation/${article.slug}`}
@@ -140,9 +167,9 @@ const DigitalNomadHub = () => {
 
                       {/* Content */}
                       <div className="flex-1 min-w-0">
-                        <h2 className="text-xl font-bold text-foreground mb-2 hover:text-foreground/80 transition-colors">
+                        <h3 className="text-xl font-bold text-foreground mb-2 hover:text-foreground/80 transition-colors">
                           {article.title}
-                        </h2>
+                        </h3>
 
                         {/* Meta */}
                         <div className="flex items-center gap-3 text-sm text-muted-foreground">

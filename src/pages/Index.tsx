@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import SidebarAd from "@/components/SidebarAd";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryTags from "@/components/CategoryTags";
@@ -11,6 +19,7 @@ import { Search, Plus, Loader2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/lib/supabaseClient";
+import { Link } from "react-router-dom";
 
 const ARTICLES_PER_PAGE = 9;
 const FEATURED_CATEGORIES = ["Digital Nomads", "Geo Politics", "Solopreneur", "Treasury Desk"];
@@ -36,6 +45,12 @@ interface Ad {
   bg_color: string;
 }
 
+interface SeoCategory {
+  slug: string;
+  title: string;
+  order_index: number;
+}
+
 const Index = () => {
   const [email, setEmail] = useState("");
   const [subscribing, setSubscribing] = useState(false);
@@ -47,26 +62,13 @@ const Index = () => {
   const [rightAds, setRightAds] = useState<Ad[]>([]);
   const [subscriberCount, setSubscriberCount] = useState(1851);
   const [displayCount, setDisplayCount] = useState(1851);
-
-  // Static articles (not in DB)
-  const staticArticles = [
-    {
-      id: 'static-relocation-checklist',
-      slug: 'relocation-checklist-digital-nomads',
-      icon: '🗺️',
-      title: 'Relocation Checklist for Digital Nomads',
-      created_at: '2025-12-31T00:00:00Z',
-      category: {
-        name: 'Digital Nomads',
-        color: 'bg-green-50 text-green-700 border-green-200',
-      },
-    },
-  ];
+  const [seoCategories, setSeoCategories] = useState<SeoCategory[]>([]);
 
   useEffect(() => {
     fetchArticles();
     fetchAds();
     fetchSubscriberCount();
+    fetchSeoCategories();
   }, []);
 
   const fetchArticles = async () => {
@@ -131,6 +133,21 @@ const Index = () => {
       setSubscriberCount(total);
     } catch (error) {
       console.error("Error fetching subscriber count:", error);
+    }
+  };
+
+  const fetchSeoCategories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("seo_categories")
+        .select("slug, title, order_index")
+        .eq("is_active", true)
+        .order("order_index");
+
+      if (error) throw error;
+      setSeoCategories(data || []);
+    } catch (error) {
+      console.error("Error fetching SEO categories:", error);
     }
   };
 
@@ -218,8 +235,8 @@ const Index = () => {
   };
 
   const filteredArticles = selectedCategory 
-    ? [...staticArticles, ...articles].filter((a) => a.category?.name === selectedCategory) 
-    : [...staticArticles, ...articles];
+    ? articles.filter((a) => a.category?.name === selectedCategory) 
+    : articles;
     
   const visibleArticles = filteredArticles.slice(0, visibleCount);
   const hasMore = visibleCount < filteredArticles.length;
@@ -274,13 +291,59 @@ const Index = () => {
 
         {/* Center Content */}
         <div className="flex-1">
-          {/* Header */}
-          <header className="pt-6 pb-8 px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center mb-6">
-                <img src={logo} alt="Logo" className="w-12 h-12 rounded-xl" />
+          {/* Header with Navigation */}
+          <header className="border-b border-border/30 bg-background sticky top-0 z-50">
+            <div className="max-w-4xl mx-auto px-4 py-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-6">
+                  <Link to="/" className="flex items-center gap-2">
+                    <img src={logo} alt="Logo" className="w-8 h-8 rounded-lg" />
+                    <span className="font-semibold text-foreground">Rarible Nomads</span>
+                  </Link>
+                  
+                  <NavigationMenu>
+                    <NavigationMenuList>
+                      <NavigationMenuItem>
+                        <NavigationMenuTrigger className="h-9 text-sm">
+                          Categories
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[300px] gap-2 p-4">
+                            {seoCategories.map((category) => (
+                              <li key={category.slug}>
+                                <NavigationMenuLink asChild>
+                                  <Link
+                                    to={`/digital-nomad-relocation/category/${category.slug}`}
+                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                  >
+                                    <div className="text-sm font-medium leading-none">{category.title}</div>
+                                  </Link>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                            <li className="border-t pt-2 mt-2">
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to="/digital-nomad-relocation"
+                                  className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground text-sm font-medium"
+                                >
+                                  View All Topics →
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    </NavigationMenuList>
+                  </NavigationMenu>
+                </div>
               </div>
+            </div>
+          </header>
 
+          {/* Main Header Section */}
+          <div className="pt-6 pb-8 px-4">
+            <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4 leading-tight text-foreground">
                 Rarible{" "}
                 <span className="relative inline-block z-0">
@@ -350,7 +413,7 @@ const Index = () => {
                 ))}
               </div>
             </div>
-          </header>
+          </div>
 
           {/* Article Cards Grid */}
           <section className="py-8 px-4">
