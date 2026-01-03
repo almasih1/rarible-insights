@@ -1,26 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <!-- Homepage -->
   <url>
     <loc>https://www.rariblenomads.info/</loc>
-    <lastmod>2025-12-31</lastmod>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- Digital Nomad Relocation Hub -->
   <url>
-    <loc>https://www.rariblenomads.info/digital-nomad-relocation/</loc>
-    <lastmod>2025-12-31</lastmod>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation</loc>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- Articles -->
+  <!-- SEO Category Pages -->
   <url>
-    <loc>https://www.rariblenomads.info/digital-nomad-relocation/portugal-or-spain-which-country-fits-digital-nomads</loc>
-    <lastmod>2025-12-28</lastmod>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/visas-residency</loc>
+    <lastmod>2026-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/taxes-legal</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/banking-finance</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/healthcare-insurance</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/cost-living-housing</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/remote-work-income</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/category/safety-infrastructure</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Articles -->
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/relocation-checklist-for-digital-nomads</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Static Pages -->
+  <url>
+    <loc>https://www.rariblenomads.info/about</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/contact</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/privacy-policy</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/disclaimer</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/editorial-policy</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/newsletter</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Footer Static Guide Pages -->
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/documents-needed</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/digital-nomad-visas</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/relocation-timeline</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/relocation-cost</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/country-guides</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/nomad-taxes</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/healthcare-insurance</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/banking-abroad</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation/relocation-mistakes</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
 </urlset>
