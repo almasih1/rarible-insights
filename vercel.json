@@ -5,7 +5,7 @@
       "destination": "/api/sitemap.xml"
     },
     {
-      "source": "/(.*)",        ← НОВОЕ ПРАВИЛО!
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
