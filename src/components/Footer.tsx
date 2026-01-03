@@ -1,77 +1,100 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabaseClient";
-
-interface SeoCategory {
-  slug: string;
-  title: string;
-  order_index: number;
-}
 
 const Footer = () => {
-  const [seoCategories, setSeoCategories] = useState<SeoCategory[]>([]);
-
-  useEffect(() => {
-    fetchSeoCategories();
-  }, []);
-
-  const fetchSeoCategories = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("seo_categories")
-        .select("slug, title, order_index")
-        .eq("is_active", true)
-        .order("order_index");
-
-      if (error) throw error;
-      setSeoCategories(data || []);
-    } catch (error) {
-      console.error("Error fetching SEO categories:", error);
-    }
-  };
-
   return (
     <footer className="border-t border-border/30 bg-background">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Footer Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Column 1 - SEO Categories */}
+          {/* Column 1 - Digital Nomad Relocation */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">Categories</h3>
+            <h3 className="font-semibold text-foreground mb-4">Digital Nomad Relocation</h3>
             <ul className="space-y-2.5">
-              {seoCategories.slice(0, 4).map((category) => (
-                <li key={category.slug}>
-                  <Link 
-                    to={`/digital-nomad-relocation/category/${category.slug}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {category.title}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-checklist-digital-nomads"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Relocation Checklist
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/documents-needed"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Documents for Digital Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/digital-nomad-visas"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Digital Nomad Visas (by Country)
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-timeline"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Relocation Timeline
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-cost"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Cost of Relocation Abroad
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Column 2 - More Categories */}
+          {/* Column 2 - Guides & Resources */}
           <div>
-            <h3 className="font-semibold text-foreground mb-4">More Topics</h3>
+            <h3 className="font-semibold text-foreground mb-4">Guides & Resources</h3>
             <ul className="space-y-2.5">
-              {seoCategories.slice(4).map((category) => (
-                <li key={category.slug}>
-                  <Link 
-                    to={`/digital-nomad-relocation/category/${category.slug}`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {category.title}
-                  </Link>
-                </li>
-              ))}
               <li>
                 <Link 
-                  to="/digital-nomad-relocation"
+                  to="/digital-nomad-relocation/country-guides"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  All Topics →
+                  Country Relocation Guides
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/nomad-taxes"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Taxes for Digital Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/healthcare-insurance"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Healthcare & Insurance Abroad
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/banking-abroad"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Banking & Payments for Nomads
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation/relocation-mistakes"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Common Relocation Mistakes
                 </Link>
               </li>
             </ul>
@@ -141,7 +164,15 @@ const Footer = () => {
                   to="/digital-nomad-relocation"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Latest Guides
+                  Latest Relocation Guides
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/digital-nomad-relocation"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Updates & New Articles
                 </Link>
               </li>
             </ul>
