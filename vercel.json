@@ -3,6 +3,10 @@
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap.xml"
+    },
+    {
+      "source": "/(.*)",        ← НОВОЕ ПРАВИЛО!
+      "destination": "/index.html"
     }
   ]
 }
