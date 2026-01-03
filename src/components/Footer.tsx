@@ -12,7 +12,7 @@ const Footer = () => {
             <ul className="space-y-2.5">
               <li>
                 <Link 
-                  to="/digital-nomad-relocation/relocation-checklist-digital-nomads"
+                  to="/digital-nomad-relocation/relocation-checklist-for-digital-nomads"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Relocation Checklist
