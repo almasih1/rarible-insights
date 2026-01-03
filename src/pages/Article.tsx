@@ -349,7 +349,7 @@ const Article = () => {
 
           {/* Article Content */}
           <div 
-            className="prose prose-neutral max-w-none"
+            className="article-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
