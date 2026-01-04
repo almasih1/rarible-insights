@@ -30,15 +30,15 @@ const CompactAdCard = ({ icon, name, bgColor = "bg-gray-50", url }: CompactAdCar
   const shortName = getShortName(name);
 
   const content = (
-    <div className="flex flex-col items-center justify-center gap-2 w-28 h-20">
-      <div className="text-xl">{icon}</div>
-      <h3 className="font-medium text-xs text-foreground text-center leading-tight">
+    <div className="flex items-center gap-2.5 px-4 py-2.5 min-w-[140px]">
+      <div className="text-xl flex-shrink-0">{icon}</div>
+      <h3 className="font-medium text-sm text-foreground whitespace-nowrap">
         {shortName}
       </h3>
     </div>
   );
 
-  const className = `${bgColor} border ${borderColor} rounded-xl transition-all`;
+  const className = `${bgColor} border ${borderColor} rounded-xl transition-all inline-block`;
 
   if (url) {
     return (
@@ -46,7 +46,7 @@ const CompactAdCard = ({ icon, name, bgColor = "bg-gray-50", url }: CompactAdCar
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${className} block cursor-pointer hover:shadow-sm`}
+        className={`${className} cursor-pointer hover:shadow-sm`}
       >
         {content}
       </a>
