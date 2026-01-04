@@ -204,7 +204,7 @@ const Index = () => {
   };
 
   const filteredArticles = selectedCategory 
-    ? articles.filter((a) => a.category?.name === selectedCategory) 
+    ? articles.filter((a) => a.seo_category?.title === selectedCategory) 
     : articles;
     
   const visibleArticles = filteredArticles.slice(0, visibleCount);
@@ -215,19 +215,8 @@ const Index = () => {
     setVisibleCount(ARTICLES_PER_PAGE);
   };
 
-  const formattedArticles = visibleArticles.map(article => ({
-    id: article.id,
-    slug: article.slug,
-    icon: article.icon,
-    title: article.title,
-    date: new Date(article.created_at).toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric', 
-      year: 'numeric' 
-    }),
-    category: article.category?.name || "Uncategorized",
-    categoryColor: article.category?.color || "bg-gray-100 text-gray-700 border-gray-200",
-  }));
+  // Pass articles directly to ArticleCard - no transformation needed
+  const visibleArticlesForDisplay = visibleArticles;
 
   return (
     <>
@@ -344,15 +333,15 @@ const Index = () => {
               <div className="text-center py-12">
                 <p className="text-muted-foreground">Loading articles...</p>
               </div>
-            ) : formattedArticles.length === 0 ? (
+            ) : visibleArticlesForDisplay.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground">No articles found.</p>
               </div>
             ) : (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {formattedArticles.map((article, index) => (
-                    <ArticleCard key={index} {...article} />
+                  {visibleArticlesForDisplay.map((article) => (
+                    <ArticleCard key={article.id} {...article} />
                   ))}
                 </div>
 
