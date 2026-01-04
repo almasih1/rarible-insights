@@ -21,9 +21,10 @@ interface Article {
   slug: string;
   icon: string;
   created_at: string;
-  category?: {
-    name: string;
-    color: string;
+  seo_category?: {
+    id: string;
+    title: string;
+    slug: string;
   };
 }
 
@@ -64,7 +65,7 @@ const Index = () => {
           slug,
           icon,
           created_at,
-          category:categories(name, color)
+          seo_category:seo_categories(id, title, slug)
         `)
         .eq("status", "published")
         .order("created_at", { ascending: false });
