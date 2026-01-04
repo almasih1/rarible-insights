@@ -27,7 +27,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ArticleEditor from "./pages/ArticleEditor";
 import AdsManager from "./pages/AdsManager";
-import CategoriesManager from "./pages/CategoriesManager";
+import SEOCategoriesManager from "./pages/SEOCategoriesManager";
 import AuthorsManager from "./pages/AuthorsManager";
 import SubscribersManager from "./pages/SubscribersManager";
 
@@ -86,7 +86,7 @@ const App = () => (
           <Route path="/admin/articles/new" element={<ArticleEditor />} />
           <Route path="/admin/articles/edit/:id" element={<ArticleEditor />} />
           <Route path="/admin/ads" element={<AdsManager />} />
-          <Route path="/admin/categories" element={<CategoriesManager />} />
+          <Route path="/admin/categories" element={<SEOCategoriesManager />} />
           <Route path="/admin/authors" element={<AuthorsManager />} />
           <Route path="/admin/subscribers" element={<SubscribersManager />} />
           
