@@ -15,42 +15,24 @@ interface Article {
   icon: string;
   read_time: number;
   created_at: string;
-  category?: {
-    name: string;
-    color: string;
+  seo_category?: {
+    id: string;
+    title: string;
+    slug: string;
   };
-}
-
-interface SeoCategory {
-  id: string;
-  slug: string;
-  title: string;
-  order_index: number;
 }
 
 const DigitalNomadHub = () => {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [seoCategories, setSeoCategories] = useState<SeoCategory[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
+    fetchArticles();
   }, []);
 
-  const fetchData = async () => {
+  const fetchArticles = async () => {
     try {
-      // Fetch SEO categories
-      const { data: categoriesData, error: categoriesError } = await supabase
-        .from("seo_categories")
-        .select("id, slug, title, order_index")
-        .eq("is_active", true)
-        .order("order_index");
-
-      if (categoriesError) throw categoriesError;
-      setSeoCategories(categoriesData || []);
-
-      // Fetch articles
-      const { data: articlesData, error: articlesError } = await supabase
+      const { data, error } = await supabase
         .from("articles")
         .select(`
           id,
@@ -59,19 +41,21 @@ const DigitalNomadHub = () => {
           icon,
           read_time,
           created_at,
-          category:categories(name, color)
+          seo_category:seo_categories(id, title, slug)
         `)
         .eq("status", "published")
         .order("created_at", { ascending: false });
 
-      if (articlesError) throw articlesError;
-      setArticles(articlesData || []);
+      if (error) throw error;
+      setArticles(data || []);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching articles:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  const allArticles = articles;
 
   return (
     <>
@@ -113,46 +97,19 @@ const DigitalNomadHub = () => {
           </p>
         </section>
 
-        {/* SEO Categories Section */}
-        <section className="max-w-4xl mx-auto px-4 pb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Browse by Topic</h2>
-          
-          {loading ? (
-            <div className="text-center py-8">
-              <p className="text-muted-foreground">Loading categories...</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {seoCategories.map((category) => (
-                <Link
-                  key={category.id}
-                  to={`/digital-nomad-relocation/category/${category.slug}`}
-                  className="block border border-border/30 rounded-lg p-5 hover:border-border hover:shadow-md transition-all"
-                >
-                  <h3 className="text-lg font-semibold text-foreground hover:text-foreground/80 transition-colors">
-                    {category.title}
-                  </h3>
-                </Link>
-              ))}
-            </div>
-          )}
-        </section>
-
         {/* Articles Section */}
         <section className="max-w-4xl mx-auto px-4 pb-16">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Latest Articles</h2>
-          
           {loading ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">Loading articles...</p>
             </div>
-          ) : articles.length === 0 ? (
+          ) : allArticles.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground">No articles yet. Check back soon!</p>
             </div>
           ) : (
             <div className="space-y-6">
-              {articles.map((article) => (
+              {allArticles.map((article) => (
                 <Link
                   key={article.id}
                   to={`/digital-nomad-relocation/${article.slug}`}
@@ -167,9 +124,9 @@ const DigitalNomadHub = () => {
 
                       {/* Content */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-bold text-foreground mb-2 hover:text-foreground/80 transition-colors">
+                        <h2 className="text-xl font-bold text-foreground mb-2 hover:text-foreground/80 transition-colors">
                           {article.title}
-                        </h3>
+                        </h2>
 
                         {/* Meta */}
                         <div className="flex items-center gap-3 text-sm text-muted-foreground">
@@ -185,14 +142,14 @@ const DigitalNomadHub = () => {
                             <Clock className="w-3.5 h-3.5" />
                             <span>{article.read_time} min read</span>
                           </div>
-                          {article.category && (
+                          {article.seo_category && (
                             <>
                               <span>·</span>
                               <Badge
                                 variant="outline"
-                                className={`text-xs px-2 py-0.5 rounded ${article.category.color}`}
+                                className="text-xs px-2 py-0.5 rounded bg-blue-50 text-blue-700 border-blue-200"
                               >
-                                {article.category.name}
+                                {article.seo_category.title}
                               </Badge>
                             </>
                           )}
