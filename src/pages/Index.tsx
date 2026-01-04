@@ -231,8 +231,8 @@ const Index = () => {
       <WebsiteSchema />
       
       <div className="min-h-screen bg-background">
-      {/* Mobile Top Carousel - visible only on mobile */}
-      <div className="xl:hidden">
+      {/* Mobile Top Carousel - visible only on mobile, sticky */}
+      <div className="xl:hidden sticky top-0 z-50 bg-background">
         <MobileAdCarousel ads={leftAds} direction="left" />
       </div>
 
@@ -387,8 +387,8 @@ const Index = () => {
         </aside>
       </div>
 
-      {/* Mobile Bottom Carousel - visible only on mobile */}
-      <div className="xl:hidden">
+      {/* Mobile Bottom Carousel - visible only on mobile, sticky */}
+      <div className="xl:hidden sticky bottom-0 z-50 bg-background">
         <MobileAdCarousel ads={rightAds} direction="right" />
       </div>
     </div>

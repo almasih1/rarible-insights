@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import SidebarAd from "./SidebarAd";
+import CompactAdCard from "./CompactAdCard";
 
 interface Ad {
   id: string;
@@ -68,11 +68,10 @@ const MobileAdCarousel = ({ ads, direction = 'left' }: MobileAdCarouselProps) =>
         }}
       >
         {duplicatedAds.map((ad, index) => (
-          <div key={`${ad.id}-${index}`} className="flex-shrink-0 w-64">
-            <SidebarAd
+          <div key={`${ad.id}-${index}`} className="flex-shrink-0">
+            <CompactAdCard
               icon={ad.icon}
               name={ad.name}
-              description={ad.description}
               bgColor={ad.bg_color}
               url={ad.url}
             />
