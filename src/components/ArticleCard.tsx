@@ -5,20 +5,29 @@ interface ArticleCardProps {
   id: string;
   slug: string;
   title: string;
-  date: string;
-  category: string;
-  categoryColor: string;
+  created_at: string;
   icon?: string;
+  seo_category?: {
+    id: string;
+    title: string;
+    slug: string;
+  };
 }
 
 const ArticleCard = ({ 
   slug,
   title, 
-  date, 
-  category, 
-  categoryColor, 
-  icon = "📄"
+  created_at, 
+  icon = "📄",
+  seo_category
 }: ArticleCardProps) => {
+  // Format date
+  const formattedDate = new Date(created_at).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
     <Link to={`/digital-nomad-relocation/${slug}`}>
       <article className="bg-card border border-border/40 rounded-xl p-4 hover:shadow-md transition-all cursor-pointer group">
@@ -36,13 +45,22 @@ const ArticleCard = ({
         
         {/* Date and Category Row */}
         <div className="flex items-center justify-between pt-3 border-t border-border/30">
-          <span className="text-xs text-muted-foreground">{date}</span>
-          <Badge 
-            variant="outline" 
-            className={`text-[10px] px-2 py-0.5 rounded font-medium ${categoryColor}`}
-          >
-            {category}
-          </Badge>
+          <span className="text-xs text-muted-foreground">{formattedDate}</span>
+          {seo_category ? (
+            <Badge 
+              variant="outline" 
+              className="text-[10px] px-2 py-0.5 rounded font-medium bg-blue-50 text-blue-700 border-blue-200"
+            >
+              {seo_category.title}
+            </Badge>
+          ) : (
+            <Badge 
+              variant="outline" 
+              className="text-[10px] px-2 py-0.5 rounded font-medium bg-gray-50 text-gray-600 border-gray-200"
+            >
+              Uncategorized
+            </Badge>
+          )}
         </div>
       </article>
     </Link>
