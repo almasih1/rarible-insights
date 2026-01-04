@@ -24,9 +24,10 @@ interface Article {
   status: string;
   views: number;
   created_at: string;
-  category?: {
-    name: string;
-    color: string;
+  seo_category?: {
+    id: string;
+    title: string;
+    slug: string;
   };
 }
 
@@ -101,7 +102,7 @@ const AdminDashboard = () => {
           status,
           views,
           created_at,
-          category:categories(name, color)
+          seo_category:seo_categories(id, title, slug)
         `)
         .order("created_at", { ascending: false })
         .limit(10);
@@ -340,11 +341,11 @@ const AdminDashboard = () => {
                         <span>{article.views} views</span>
                         <span>•</span>
                         <span>{new Date(article.created_at).toLocaleDateString()}</span>
-                        {article.category && (
+                        {article.seo_category && (
                           <>
                             <span>•</span>
-                            <span className={`px-2 py-0.5 rounded text-xs ${article.category.color}`}>
-                              {article.category.name}
+                            <span className="px-2 py-0.5 rounded text-xs bg-blue-50 text-blue-700 border border-blue-200">
+                              {article.seo_category.title}
                             </span>
                           </>
                         )}
