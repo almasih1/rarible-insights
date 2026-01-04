@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SidebarAd from "@/components/SidebarAd";
+import MobileAdCarousel from "@/components/MobileAdCarousel";
 import ArticleCard from "@/components/ArticleCard";
 import CategoryTags from "@/components/CategoryTags";
 import Footer from "@/components/Footer";
@@ -230,9 +231,14 @@ const Index = () => {
       <WebsiteSchema />
       
       <div className="min-h-screen bg-background">
+      {/* Mobile Top Carousel - visible only on mobile */}
+      <div className="xl:hidden">
+        <MobileAdCarousel ads={leftAds} direction="left" />
+      </div>
+
       <div className="flex w-full">
-        {/* Left Sidebar */}
-        <aside className="hidden xl:block w-56 p-4 shrink-0">
+        {/* Left Sidebar - wider */}
+        <aside className="hidden xl:block w-72 p-4 shrink-0">
           <div className="sticky top-4 flex flex-col gap-4">
             {leftAds.map((ad) => (
               <SidebarAd
@@ -247,11 +253,11 @@ const Index = () => {
           </div>
         </aside>
 
-        {/* Center Content */}
-        <div className="flex-1">
+        {/* Center Content - narrower */}
+        <div className="flex-1 max-w-4xl mx-auto">
           {/* Header */}
           <header className="pt-6 pb-8 px-4">
-            <div className="max-w-4xl mx-auto text-center">
+            <div className="max-w-3xl mx-auto text-center">
               <div className="flex items-center justify-center mb-6">
                 <img src={logo} alt="Logo" className="w-12 h-12 rounded-xl" />
               </div>
@@ -364,8 +370,8 @@ const Index = () => {
           <Footer />
         </div>
 
-        {/* Right Sidebar */}
-        <aside className="hidden xl:block w-56 p-4 shrink-0">
+        {/* Right Sidebar - wider */}
+        <aside className="hidden xl:block w-72 p-4 shrink-0">
           <div className="sticky top-4 flex flex-col gap-4">
             {rightAds.map((ad) => (
               <SidebarAd
@@ -379,6 +385,11 @@ const Index = () => {
             ))}
           </div>
         </aside>
+      </div>
+
+      {/* Mobile Bottom Carousel - visible only on mobile */}
+      <div className="xl:hidden">
+        <MobileAdCarousel ads={rightAds} direction="right" />
       </div>
     </div>
     </>
