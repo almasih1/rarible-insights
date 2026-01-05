@@ -35,7 +35,7 @@ async function generateSitemap() {
   
   <!-- Digital Nomad Relocation Hub -->
   <url>
-    <loc>https://www.rariblenomads.info/digital-nomad-relocation/</loc>
+    <loc>https://www.rariblenomads.info/digital-nomad-relocation</loc>
     <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
