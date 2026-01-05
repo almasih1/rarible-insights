@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
 import { BreadcrumbSchema, WebsiteSchema } from "@/components/StructuredData";
+import { ItemListSchema } from "@/components/ItemListSchema";
 import logo from "@/assets/logo.png";
 import { supabase } from "@/lib/supabaseClient";
 import { Clock, Download, ArrowRight, CheckCircle2 } from "lucide-react";
@@ -173,6 +174,28 @@ const DigitalNomadHub = () => {
 
       <WebsiteSchema />
 
+      {/* ItemList Schema for Categories */}
+      <ItemListSchema
+        name="Digital Nomad Relocation Topics"
+        items={CATEGORIES.map((cat) => ({
+          name: cat.title,
+          url: `https://www.rariblenomads.info/digital-nomad-relocation/category/${cat.slug}`,
+          description: cat.description,
+        }))}
+      />
+
+      {/* ItemList Schema for Latest Articles */}
+      {articles.length > 0 && (
+        <ItemListSchema
+          name="Latest Digital Nomad Relocation Guides"
+          items={articles.map((article) => ({
+            name: article.title,
+            url: `https://www.rariblenomads.info/digital-nomad-relocation/${article.slug}`,
+            description: article.meta_description,
+          }))}
+        />
+      )}
+
       <div className="min-h-screen bg-background">
         {/* Header */}
         <header className="border-b border-border/30">
@@ -294,7 +317,16 @@ const DigitalNomadHub = () => {
 
           {/* Latest Guides */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold text-foreground mb-6">Latest guides</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-foreground">Latest guides</h2>
+              <Link
+                to="/digital-nomad-relocation"
+                className="text-sm font-medium text-primary hover:underline flex items-center gap-1"
+              >
+                View all guides
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
             {loading ? (
               <p className="text-muted-foreground">Loading articles...</p>
             ) : articles.length === 0 ? (
