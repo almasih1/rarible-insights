@@ -351,7 +351,7 @@ const DigitalNomadHub = () => {
           </section>
 
           {/* SEO Content */}
-          <section className="prose prose-neutral max-w-none mb-16">
+          <section className="seo-content mb-16">
             <h2>What "relocation" means for digital nomads</h2>
             <p>
               Digital nomad relocation is different from tourism or short-term travel. It involves establishing legal residency, maintaining tax compliance, setting up local banking, and proving stable income to immigration authorities. Unlike traditional expats sent by employers, digital nomads must handle the entire process independently—often without clear instructions or local support.
