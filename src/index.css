@@ -348,4 +348,28 @@ All colors MUST be HSL.
   .article-content em {
     font-style: italic;
   }
+}/* CRITICAL FIX - Handle TipTap's li > p structure */
+.article-content ul {
+  margin: 1rem 0 !important;
+  padding-left: 1.5rem !important;
+  list-style-type: disc !important;
+  list-style-position: outside !important;
+}
+
+.article-content ol {
+  margin: 1rem 0 !important;
+  padding-left: 1.5rem !important;
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+}
+
+.article-content li {
+  margin: 0.5rem 0 !important;
+  display: list-item !important;
+}
+
+/* Handle paragraph inside list items (TipTap structure) */
+.article-content li > p {
+  margin: 0 !important;
+  display: inline !important;
 }
