@@ -15,35 +15,53 @@ interface FooterColumn {
 interface FooterContent {
   columns: FooterColumn[];
   copyright: string;
+  description: string;
 }
 
 const Footer = () => {
   const [footerContent, setFooterContent] = useState<FooterContent>({
     columns: [
       {
-        title: "Content",
+        title: "Digital Nomad Relocation",
         links: [
-          { text: "Digital Nomad Relocation", url: "/digital-nomad-relocation" },
-          { text: "Newsletter", url: "/newsletter" },
+          { text: "Relocation Checklist", url: "/digital-nomad-relocation/relocation-checklist-for-digital-nomads" },
+          { text: "Documents for Digital Nomads", url: "/digital-nomad-relocation/documents-needed" },
+          { text: "Digital Nomad Visas (by Country)", url: "/digital-nomad-relocation/digital-nomad-visas" },
+          { text: "Relocation Timeline", url: "/digital-nomad-relocation/relocation-timeline" },
+          { text: "Cost of Relocation Abroad", url: "/digital-nomad-relocation/relocation-cost" },
         ],
       },
       {
-        title: "About",
+        title: "Guides & Resources",
         links: [
-          { text: "About Rarible Nomads", url: "/about" },
-          { text: "Contact", url: "/contact" },
+          { text: "Country Relocation Guides", url: "/digital-nomad-relocation/country-guides" },
+          { text: "Taxes for Digital Nomads", url: "/digital-nomad-relocation/nomad-taxes" },
+          { text: "Healthcare & Insurance Abroad", url: "/digital-nomad-relocation/healthcare-insurance" },
+          { text: "Banking & Payments for Nomads", url: "/digital-nomad-relocation/banking-abroad" },
+          { text: "Common Relocation Mistakes", url: "/digital-nomad-relocation/relocation-mistakes" },
+        ],
+      },
+      {
+        title: "About Rarible Nomads",
+        links: [
+          { text: "About Us", url: "/about" },
           { text: "Editorial Policy", url: "/editorial-policy" },
-        ],
-      },
-      {
-        title: "Legal",
-        links: [
+          { text: "Contact", url: "/contact" },
           { text: "Privacy Policy", url: "/privacy-policy" },
           { text: "Disclaimer", url: "/disclaimer" },
         ],
       },
+      {
+        title: "Stay Updated",
+        links: [
+          { text: "Newsletter for Digital Nomads", url: "/newsletter" },
+          { text: "Latest Relocation Guides", url: "/digital-nomad-relocation" },
+          { text: "Updates & New Articles", url: "/digital-nomad-relocation" },
+        ],
+      },
     ],
-    copyright: "© 2026 Rarible Nomads. All rights reserved.",
+    description: "Rarible Nomads is an independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
+    copyright: "© 2025 Rarible Nomads. All rights reserved.",
   });
 
   useEffect(() => {
@@ -62,18 +80,18 @@ const Footer = () => {
       if (data) setFooterContent(data.value as FooterContent);
     } catch (error) {
       console.error("Error fetching footer content:", error);
-      // Use default content if fetch fails
     }
   };
 
   return (
-    <footer className="border-t border-border/30 mt-16">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8">
+    <footer className="border-t border-border/30 bg-background">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Footer Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {footerContent.columns.map((column, index) => (
             <div key={index}>
               <h3 className="font-semibold text-foreground mb-4">{column.title}</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
@@ -88,8 +106,15 @@ const Footer = () => {
             </div>
           ))}
         </div>
-        <div className="pt-8 border-t border-border/30 text-center">
-          <p className="text-sm text-muted-foreground">{footerContent.copyright}</p>
+
+        {/* Footer Bottom */}
+        <div className="pt-8 border-t border-border/30">
+          <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
+            {footerContent.description}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {footerContent.copyright}
+          </p>
         </div>
       </div>
     </footer>

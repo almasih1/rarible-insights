@@ -145,7 +145,6 @@ const Index = () => {
       if (data) setHomepageHero(data.value as HomepageHero);
     } catch (error) {
       console.error("Error fetching homepage hero:", error);
-      // Use default if fetch fails
     }
   };
 
@@ -305,10 +304,7 @@ const Index = () => {
                 {homepageHero.subtitle}
               </p>
               <p className="text-muted-foreground mb-8">
-                {homepageHero.subscriber_text.replace(
-                  "{count}",
-                  displayCount.toLocaleString()
-                )}
+                {homepageHero.subscriber_text.replace("{count}", displayCount.toLocaleString())}
               </p>
 
               <form onSubmit={handleSubscribe} className="flex items-center justify-center gap-3 max-w-xl mx-auto">
