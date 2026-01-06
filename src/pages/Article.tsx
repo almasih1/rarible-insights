@@ -31,6 +31,11 @@ interface Article {
     name: string;
     color: string;
   };
+  seo_category?: {
+    id: string;
+    title: string;
+    slug: string;
+  };
   author?: {
     name: string;
     twitter_url?: string;
@@ -63,6 +68,7 @@ const Article = () => {
         .select(`
           *,
           category:categories(name, color),
+          seo_category:seo_categories(id, title, slug),
           author:authors(name, twitter_url, instagram_url, youtube_url, linkedin_url),
           summary_points:article_summary_points(point_text, order_index)
         `)
@@ -352,6 +358,32 @@ const Article = () => {
             className="article-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
+
+          {/* Related Guide - Link to Hub */}
+          <div className="mt-12 pt-8 border-t border-border/30">
+            <p className="text-sm font-semibold text-muted-foreground mb-2">Related guide</p>
+            <Link 
+              to="/digital-nomad-relocation"
+              className="text-primary hover:underline font-medium"
+            >
+              Digital Nomad Relocation Hub →
+            </Link>
+          </div>
+
+          {/* Filed Under - Link to Category */}
+          {article.seo_category && (
+            <div className="mt-8">
+              <p className="text-sm text-muted-foreground">
+                Filed under:{" "}
+                <Link
+                  to={`/digital-nomad-relocation/category/${article.seo_category.slug}`}
+                  className="text-primary hover:underline font-medium"
+                >
+                  {article.seo_category.title}
+                </Link>
+              </p>
+            </div>
+          )}
 
           {/* Related Articles */}
           {relatedArticles && relatedArticles.length > 0 && (

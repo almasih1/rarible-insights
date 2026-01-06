@@ -334,22 +334,23 @@ const DigitalNomadHub = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {articles.map((article) => (
-                  <Link
+                  <div
                     key={article.id}
-                    to={`/digital-nomad-relocation/${article.slug}`}
-                    className="group border border-border/40 rounded-xl p-6 hover:border-border hover:shadow-md transition-all bg-card"
+                    className="border border-border/40 rounded-xl p-6 hover:border-border hover:shadow-md transition-all bg-card"
                   >
-                    <div className="text-2xl mb-3">{article.icon}</div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                    
-                    {/* Excerpt */}
-                    {article.meta_description && (
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                        {article.meta_description}
-                      </p>
-                    )}
+                    <Link to={`/digital-nomad-relocation/${article.slug}`} className="group block">
+                      <div className="text-2xl mb-3">{article.icon}</div>
+                      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                        {article.title}
+                      </h3>
+                      
+                      {/* Excerpt */}
+                      {article.meta_description && (
+                        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                          {article.meta_description}
+                        </p>
+                      )}
+                    </Link>
 
                     <div className="flex items-center gap-3 text-xs text-muted-foreground">
                       <span>
@@ -367,16 +368,21 @@ const DigitalNomadHub = () => {
                       {article.seo_category && (
                         <>
                           <span>·</span>
-                          <Badge
-                            variant="outline"
-                            className="text-xs px-2 py-0 rounded bg-blue-50 text-blue-700 border-blue-200"
+                          <Link
+                            to={`/digital-nomad-relocation/category/${article.seo_category.slug}`}
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            {article.seo_category.title}
-                          </Badge>
+                            <Badge
+                              variant="outline"
+                              className="text-xs px-2 py-0 rounded bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 transition-colors cursor-pointer"
+                            >
+                              {article.seo_category.title}
+                            </Badge>
+                          </Link>
                         </>
                       )}
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             )}

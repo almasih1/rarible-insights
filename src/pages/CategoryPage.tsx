@@ -434,61 +434,61 @@ const CategoryPage = () => {
             ) : (
               <div className="space-y-6">
                 {articles.map((article) => (
-                  <Link
-                    key={article.id}
-                    to={`/digital-nomad-relocation/${article.slug}`}
-                    className="block"
-                  >
-                    <article className="border border-border/40 rounded-xl p-6 hover:border-border hover:shadow-md transition-all bg-card">
-                      <div className="flex items-start gap-4">
-                        {/* Icon */}
-                        <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center text-2xl shrink-0">
-                          {article.icon}
-                        </div>
+                  <article key={article.id} className="border border-border/40 rounded-xl p-6 hover:border-border hover:shadow-md transition-all bg-card">
+                    <div className="flex items-start gap-4">
+                      {/* Icon */}
+                      <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center text-2xl shrink-0">
+                        {article.icon}
+                      </div>
 
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <Link to={`/digital-nomad-relocation/${article.slug}`}>
                           <h3 className="text-xl font-bold text-foreground mb-2 hover:text-primary transition-colors">
                             {article.title}
                           </h3>
+                        </Link>
 
-                          {/* Excerpt */}
-                          {article.meta_description && (
-                            <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                              {article.meta_description}
-                            </p>
-                          )}
+                        {/* Excerpt */}
+                        {article.meta_description && (
+                          <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                            {article.meta_description}
+                          </p>
+                        )}
 
-                          {/* Meta */}
-                          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                            <span>
-                              {new Date(article.created_at).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </span>
-                            <span>·</span>
-                            <div className="flex items-center gap-1.5">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span>{article.read_time} min read</span>
-                            </div>
-                            {article.seo_category && (
-                              <>
-                                <span>·</span>
+                        {/* Meta */}
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span>
+                            {new Date(article.created_at).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </span>
+                          <span>·</span>
+                          <div className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{article.read_time} min read</span>
+                          </div>
+                          {article.seo_category && (
+                            <>
+                              <span>·</span>
+                              <Link
+                                to={`/digital-nomad-relocation/category/${article.seo_category.slug}`}
+                              >
                                 <Badge
                                   variant="outline"
-                                  className="text-xs px-2 py-0.5 rounded bg-blue-50 text-blue-700 border-blue-200"
+                                  className="text-xs px-2 py-0.5 rounded bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 transition-colors cursor-pointer"
                                 >
                                   {article.seo_category.title}
                                 </Badge>
-                              </>
-                            )}
-                          </div>
+                              </Link>
+                            </>
+                          )}
                         </div>
                       </div>
-                    </article>
-                  </Link>
+                    </div>
+                  </article>
                 ))}
               </div>
             )}
