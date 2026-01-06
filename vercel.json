@@ -13,7 +13,12 @@
     {
       "source": "/digital-nomad-relocation/relocation-checklist-digital-nomads",
       "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/digital-nomad-relocation/relocation-checklist",
+      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
+      "statusCode": 301
     }
   ]
 }
