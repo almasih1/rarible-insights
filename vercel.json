@@ -1,24 +1,25 @@
 {
-  "redirects": [
+  "routes": [
     {
-      "source": "/digital-nomad-relocation/relocation-checklist-digital-nomads",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
+      "src": "^/digital-nomad-relocation/relocation-checklist-digital-nomads/?$",
+      "status": 301,
+      "headers": { "Location": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads" }
     },
     {
-      "source": "/digital-nomad-relocation/relocation-checklist",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap.xml"
+      "src": "^/digital-nomad-relocation/relocation-checklist/?$",
+      "status": 301,
+      "headers": { "Location": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads" }
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "^/sitemap\\.xml$",
+      "dest": "/api/sitemap.xml"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
