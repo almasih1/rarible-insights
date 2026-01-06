@@ -15,7 +15,8 @@ import {
   Eye,
   Grid,
   Tag,
-  Mail
+  Mail,
+  Settings
 } from "lucide-react";
 
 interface Article {
@@ -217,7 +218,7 @@ const AdminDashboard = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Quick Actions */}
         <div className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
             <Button
               onClick={() => navigate("/admin/articles/new")}
               size="lg"
@@ -227,6 +228,19 @@ const AdminDashboard = () => {
               <div className="text-center">
                 <div className="font-semibold">New Article</div>
                 <div className="text-xs opacity-80">Create content</div>
+              </div>
+            </Button>
+            
+            <Button
+              onClick={() => navigate("/admin/site-settings")}
+              size="lg"
+              variant="outline"
+              className="gap-2 h-auto py-4 flex-col"
+            >
+              <Settings className="w-5 h-5" />
+              <div className="text-center">
+                <div className="font-semibold">Site Settings</div>
+                <div className="text-xs opacity-80">Homepage & Footer</div>
               </div>
             </Button>
             
