@@ -56,8 +56,9 @@ const App = () => (
           {/* Article Pages */}
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
-          {/* 301 Redirect for old relocation-checklist URL */}
+          {/* 301 Redirects for old URLs */}
           <Route path="/digital-nomad-relocation/relocation-checklist" element={<Navigate to="/digital-nomad-relocation/relocation-checklist-for-digital-nomads" replace />} />
+          <Route path="/digital-nomad-relocation/relocation-checklist-digital-nomads" element={<Navigate to="/digital-nomad-relocation/relocation-checklist-for-digital-nomads" replace />} />
           
           {/* Footer Guide Pages (Static) */}
           <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
