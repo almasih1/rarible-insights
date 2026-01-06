@@ -16,6 +16,12 @@ import { supabase } from "@/lib/supabaseClient";
 const ARTICLES_PER_PAGE = 9;
 const FEATURED_CATEGORIES = ["Digital Nomads", "Geo Politics", "Solopreneur", "Treasury Desk"];
 
+interface HomepageHero {
+  title: string;
+  subtitle: string;
+  subscriber_text: string;
+}
+
 interface Article {
   id: string;
   title: string;
@@ -49,11 +55,17 @@ const Index = () => {
   const [rightAds, setRightAds] = useState<Ad[]>([]);
   const [subscriberCount, setSubscriberCount] = useState(1851);
   const [displayCount, setDisplayCount] = useState(1851);
+  const [homepageHero, setHomepageHero] = useState<HomepageHero>({
+    title: "Rarible Nomads",
+    subtitle: "Independent insights on digital nomad relocation and international living.",
+    subscriber_text: "Join {count} readers.",
+  });
 
   useEffect(() => {
     fetchArticles();
     fetchAds();
     fetchSubscriberCount();
+    fetchHomepageHero();
   }, []);
 
   const fetchArticles = async () => {
@@ -118,6 +130,22 @@ const Index = () => {
       setSubscriberCount(total);
     } catch (error) {
       console.error("Error fetching subscriber count:", error);
+    }
+  };
+
+  const fetchHomepageHero = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "homepage_hero")
+        .single();
+
+      if (error) throw error;
+      if (data) setHomepageHero(data.value as HomepageHero);
+    } catch (error) {
+      console.error("Error fetching homepage hero:", error);
+      // Use default if fetch fails
     }
   };
 
@@ -263,25 +291,24 @@ const Index = () => {
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4 leading-tight text-foreground">
-                Rarible{" "}
+                {homepageHero.title.split(" ")[0]}{" "}
                 <span className="relative inline-block z-0">
                   <span
                     className="absolute bottom-0 left-0 right-0 h-[45%] bg-orange-200/70"
                     style={{ zIndex: -1 }}
                   ></span>
-                  <span className="relative z-10">Nomads</span>
+                  <span className="relative z-10">{homepageHero.title.split(" ").slice(1).join(" ")}</span>
                 </span>
               </h1>
 
               <p className="text-muted-foreground mb-2">
-                Independent insights on digital nomad relocation and international living.
+                {homepageHero.subtitle}
               </p>
               <p className="text-muted-foreground mb-8">
-                Join{" "}
-                <span className="font-semibold text-foreground tabular-nums">
-                  {displayCount.toLocaleString()}
-                </span>{" "}
-                readers.
+                {homepageHero.subscriber_text.replace(
+                  "{count}",
+                  displayCount.toLocaleString()
+                )}
               </p>
 
               <form onSubmit={handleSubscribe} className="flex items-center justify-center gap-3 max-w-xl mx-auto">

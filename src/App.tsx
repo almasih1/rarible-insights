@@ -30,6 +30,7 @@ import AdsManager from "./pages/AdsManager";
 import SEOCategoriesManager from "./pages/SEOCategoriesManager";
 import AuthorsManager from "./pages/AuthorsManager";
 import SubscribersManager from "./pages/SubscribersManager";
+import SiteSettingsManager from "./pages/SiteSettingsManager";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +90,7 @@ const App = () => (
           <Route path="/admin/categories" element={<SEOCategoriesManager />} />
           <Route path="/admin/authors" element={<AuthorsManager />} />
           <Route path="/admin/subscribers" element={<SubscribersManager />} />
+          <Route path="/admin/site-settings" element={<SiteSettingsManager />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
