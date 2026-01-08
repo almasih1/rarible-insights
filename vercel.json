@@ -1,16 +1,8 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/digital-nomad-relocation/relocation-checklist-digital-nomads/?$",
-      "dest": "/api/redirect"
-    },
-    {
-      "src": "^/digital-nomad-relocation/relocation-checklist/?$",
-      "dest": "/api/redirect"
-    },
-    {
-      "src": "^/sitemap\\.xml$",
-      "dest": "/api/sitemap.xml"
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
     }
   ]
 }
