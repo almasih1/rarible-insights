@@ -1,26 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/digital-nomad-relocation/relocation-checklist-digital-nomads",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
-    },
-    {
-      "source": "/digital-nomad-relocation/relocation-checklist-digital-nomads/",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
-    },
-    {
-      "source": "/digital-nomad-relocation/relocation-checklist",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
-    },
-    {
-      "source": "/digital-nomad-relocation/relocation-checklist/",
-      "destination": "/digital-nomad-relocation/relocation-checklist-for-digital-nomads",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/sitemap.xml",
