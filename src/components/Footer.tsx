@@ -25,7 +25,7 @@ const Footer = () => {
         title: "Digital Nomad Relocation",
         links: [
           { text: "Relocation Checklist", url: "/digital-nomad-relocation/relocation-checklist-for-digital-nomads" },
-          { text: "Documents for Digital Nomads", url: "/digital-nomad-relocation/documents-needed" },
+          { text: "Documents for Digital Nomads", url: "/digital-nomad-relocation/documents-needed-for-digital-nomads" },
           { text: "Digital Nomad Visas (by Country)", url: "/digital-nomad-relocation/digital-nomad-visas" },
           { text: "Relocation Timeline", url: "/digital-nomad-relocation/relocation-timeline" },
           { text: "Cost of Relocation Abroad", url: "/digital-nomad-relocation/relocation-cost" },
