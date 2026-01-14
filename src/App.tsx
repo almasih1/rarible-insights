@@ -13,7 +13,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Disclaimer from "./pages/Disclaimer";
 import EditorialPolicy from "./pages/EditorialPolicy";
 import Newsletter from "./pages/Newsletter";
-import DocumentsNeeded from "./pages/DocumentsNeeded";
 import DigitalNomadVisas from "./pages/DigitalNomadVisas";
 import RelocationTimeline from "./pages/RelocationTimeline";
 import RelocationCost from "./pages/RelocationCost";
@@ -63,7 +62,6 @@ const App = () => (
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
           
           {/* Footer Guide Pages (Static) */}
-          <Route path="/digital-nomad-relocation/documents-needed" element={<DocumentsNeeded />} />
           <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
           <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />
           <Route path="/digital-nomad-relocation/relocation-cost" element={<RelocationCost />} />
