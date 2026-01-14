@@ -53,9 +53,6 @@ const App = () => (
           <Route path="/digital-nomad-relocation/category/:slug" element={<CategoryPage />} />
           
           {/* 301 Redirects using window.location.replace - MUST BE BEFORE :slug route */}
-          <Route path="/digital-nomad-relocation/relocation-checklist-digital-nomads" element={<RedirectLegacyChecklist />} />
-          <Route path="/digital-nomad-relocation/relocation-checklist" element={<RedirectLegacyChecklist />} />
-          <Route path="/digital-nomad-relocation/relocation-checklist/" element={<RedirectLegacyChecklist />} />
           
           {/* Article Pages */}
           <Route path="/digital-nomad-relocation/:slug" element={<Article />} />
