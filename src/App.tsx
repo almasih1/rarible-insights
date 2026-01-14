@@ -31,7 +31,6 @@ import SEOCategoriesManager from "./pages/SEOCategoriesManager";
 import AuthorsManager from "./pages/AuthorsManager";
 import SubscribersManager from "./pages/SubscribersManager";
 import SiteSettingsManager from "./pages/SiteSettingsManager";
-import RedirectLegacyChecklist from "./routes/RedirectLegacyChecklist";
 
 const queryClient = new QueryClient();
 
