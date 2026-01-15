@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/lib/supabaseClient";
 
 interface FooterLink {
   text: string;
   url: string;
 }
 
+interface FooterSection {
+  label?: string;
+  links: FooterLink[];
+}
+
 interface FooterColumn {
   title: string;
-  links: FooterLink[];
+  sections?: FooterSection[];
+  links?: FooterLink[];
 }
 
 interface FooterContent {
@@ -18,118 +23,141 @@ interface FooterContent {
   description: string;
 }
 
+// Default fallback content - MOVED OUTSIDE COMPONENT
+const defaultFooterContent: FooterContent = {
+  columns: [
+    {
+      title: "Content",
+      sections: [
+        {
+          label: "Relocation Hub",
+          links: [
+            { text: "Digital Nomad Relocation", url: "https://www.rariblenomads.info/digital-nomad-relocation" },
+            { text: "Newsletter", url: "/newsletter" },
+          ],
+        },
+        {
+          label: "Latest Guides",
+          links: [
+            { text: "Relocation Checklist (Quick)", url: "https://www.rariblenomads.info/digital-nomad-relocation/relocation-checklist-digital-nomads" },
+            { text: "Relocation Checklist (Full)", url: "https://www.rariblenomads.info/digital-nomad-relocation/relocation-checklist-for-digital-nomads" },
+            { text: "Documents Needed (Quick)", url: "https://www.rariblenomads.info/digital-nomad-relocation/documents-needed" },
+            { text: "Documents Needed (Full guide)", url: "https://www.rariblenomads.info/digital-nomad-relocation/documents-needed-for-digital-nomads" },
+            { text: "Tax Residency", url: "https://www.rariblenomads.info/digital-nomad-relocation/tax-residency-for-digital-nomads" },
+            { text: "Banking Abroad", url: "https://www.rariblenomads.info/digital-nomad-relocation/banking-abroad-for-digital-nomads" },
+          ],
+        },
+      ],
+    },
+    {
+      title: "About",
+      links: [
+        { text: "About Rarible Nomads", url: "/about" },
+        { text: "Contact", url: "/contact" },
+        { text: "Editorial Policy", url: "/editorial-policy" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { text: "Privacy Policy", url: "/privacy-policy" },
+        { text: "Disclaimer", url: "/disclaimer" },
+      ],
+    },
+    {
+      title: "Topics",
+      links: [
+        { text: "Visas & Residency", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/visas-residency" },
+        { text: "Taxes & Legal", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/taxes-legal" },
+        { text: "Banking & Finance", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/banking-finance" },
+        { text: "Healthcare & Insurance", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/healthcare-insurance" },
+        { text: "Cost of Living & Housing", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/cost-living-housing" },
+        { text: "Remote Work & Income", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/remote-work-income" },
+        { text: "Safety & Infrastructure", url: "https://www.rariblenomads.info/digital-nomad-relocation/category/safety-infrastructure" },
+      ],
+    },
+  ],
+  description: "Rarible Nomads is an independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
+  copyright: "© 2025 Rarible Nomads. All rights reserved.",
+};
+
 const Footer = () => {
-  const [footerContent, setFooterContent] = useState<FooterContent | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [footerContent] = useState<FooterContent>(defaultFooterContent);
 
-  // Default fallback content
-  const defaultFooterContent: FooterContent = {
-    columns: [
-      {
-        title: "Digital Nomad Relocation",
-        links: [
-          { text: "Relocation Checklist", url: "/digital-nomad-relocation/relocation-checklist-for-digital-nomads" },
-          { text: "Documents for Digital Nomads", url: "/digital-nomad-relocation/documents-needed-for-digital-nomads" },
-          { text: "Digital Nomad Visas (by Country)", url: "/digital-nomad-relocation/digital-nomad-visas" },
-          { text: "Relocation Timeline", url: "/digital-nomad-relocation/relocation-timeline" },
-          { text: "Cost of Relocation Abroad", url: "/digital-nomad-relocation/relocation-cost" },
-        ],
-      },
-      {
-        title: "Guides & Resources",
-        links: [
-          { text: "Country Relocation Guides", url: "/digital-nomad-relocation/country-guides" },
-          { text: "Taxes for Digital Nomads", url: "/digital-nomad-relocation/nomad-taxes" },
-          { text: "Healthcare & Insurance Abroad", url: "/digital-nomad-relocation/healthcare-insurance" },
-          { text: "Banking & Payments for Nomads", url: "/digital-nomad-relocation/banking-abroad" },
-          { text: "Common Relocation Mistakes", url: "/digital-nomad-relocation/relocation-mistakes" },
-        ],
-      },
-      {
-        title: "About Rarible Nomads",
-        links: [
-          { text: "About Us", url: "/about" },
-          { text: "Editorial Policy", url: "/editorial-policy" },
-          { text: "Contact", url: "/contact" },
-          { text: "Privacy Policy", url: "/privacy-policy" },
-          { text: "Disclaimer", url: "/disclaimer" },
-        ],
-      },
-      {
-        title: "Stay Updated",
-        links: [
-          { text: "Newsletter for Digital Nomads", url: "/newsletter" },
-          { text: "Latest Relocation Guides", url: "/digital-nomad-relocation" },
-          { text: "Updates & New Articles", url: "/digital-nomad-relocation" },
-        ],
-      },
-    ],
-    description: "Rarible Nomads is an independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
-    copyright: "© 2025 Rarible Nomads. All rights reserved.",
-  };
-
+  // Always use hardcoded content - no Supabase fetch
   useEffect(() => {
-    fetchFooterContent();
+    console.log("🚀 Footer loaded with hardcoded 4-column structure");
   }, []);
-
-  const fetchFooterContent = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key", "footer_content")
-        .single();
-
-      if (error) throw error;
-      if (data) {
-        setFooterContent(data.value as FooterContent);
-      } else {
-        setFooterContent(defaultFooterContent);
-      }
-    } catch (error) {
-      console.error("Error fetching footer content:", error);
-      setFooterContent(defaultFooterContent);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Show nothing while loading to prevent flash
-  if (loading) {
-    return (
-      <footer className="border-t border-border/30 bg-background">
-        <div className="max-w-6xl mx-auto px-4 py-12">
-          <div className="h-64 flex items-center justify-center">
-            <div className="animate-pulse text-muted-foreground text-sm">Loading...</div>
-          </div>
-        </div>
-      </footer>
-    );
-  }
-
-  // Use loaded content or fallback
-  const content = footerContent || defaultFooterContent;
 
   return (
     <footer className="border-t border-border/30 bg-background">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Footer Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {content.columns.map((column, index) => (
+          {footerContent.columns.map((column, index) => (
             <div key={index}>
               <h3 className="font-semibold text-foreground mb-4">{column.title}</h3>
-              <ul className="space-y-2.5">
-                {column.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <Link
-                      to={link.url}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              
+              {/* If column has sections (like Content column) */}
+              {column.sections && (
+                <div className="space-y-6">
+                  {column.sections.map((section, sectionIndex) => (
+                    <div key={sectionIndex}>
+                      {section.label && (
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground/70 mb-2 font-medium">
+                          {section.label}
+                        </p>
+                      )}
+                      <ul className="space-y-2.5">
+                        {section.links.map((link, linkIndex) => (
+                          <li key={linkIndex}>
+                            {link.url.startsWith('http') ? (
+                              <a
+                                href={link.url}
+                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                {link.text}
+                              </a>
+                            ) : (
+                              <Link
+                                to={link.url}
+                                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                {link.text}
+                              </Link>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* If column has simple links (like About, Legal, Topics) */}
+              {column.links && (
+                <ul className="space-y-2.5">
+                  {column.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      {link.url.startsWith('http') ? (
+                        <a
+                          href={link.url}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {link.text}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.url}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {link.text}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
@@ -137,10 +165,10 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="pt-8 border-t border-border/30">
           <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
-            {content.description}
+            {footerContent.description}
           </p>
           <p className="text-sm text-muted-foreground">
-            {content.copyright}
+            {footerContent.copyright}
           </p>
         </div>
       </div>

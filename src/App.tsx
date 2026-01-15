@@ -59,7 +59,6 @@ const App = () => (
           
           {/* Footer Guide Pages (Static) */}
           <Route path="/digital-nomad-relocation/digital-nomad-visas" element={<DigitalNomadVisas />} />
-          <Route path="/digital-nomad-relocation/documents-needed-for-digital-nomads" element={<DigitalNomadVisas />} />
           <Route path="/digital-nomad-relocation/relocation-timeline" element={<RelocationTimeline />} />
           <Route path="/digital-nomad-relocation/relocation-cost" element={<RelocationCost />} />
           <Route path="/digital-nomad-relocation/country-guides" element={<CountryGuides />} />
