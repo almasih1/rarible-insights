@@ -80,6 +80,7 @@ const App = () => (
           <Route path="/article/:slug" element={<ArticleRedirect />} />
           
           {/* Admin Routes */}
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/articles/new" element={<ArticleEditor />} />

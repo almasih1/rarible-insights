@@ -19,7 +19,11 @@ interface FooterContent {
 }
 
 const Footer = () => {
-  const [footerContent, setFooterContent] = useState<FooterContent>({
+  const [footerContent, setFooterContent] = useState<FooterContent | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Default fallback content
+  const defaultFooterContent: FooterContent = {
     columns: [
       {
         title: "Digital Nomad Relocation",
@@ -62,7 +66,7 @@ const Footer = () => {
     ],
     description: "Rarible Nomads is an independent information platform with guides, checklists, and insights to help digital nomads understand relocation, visas, taxes, and life abroad.",
     copyright: "© 2025 Rarible Nomads. All rights reserved.",
-  });
+  };
 
   useEffect(() => {
     fetchFooterContent();
@@ -77,18 +81,41 @@ const Footer = () => {
         .single();
 
       if (error) throw error;
-      if (data) setFooterContent(data.value as FooterContent);
+      if (data) {
+        setFooterContent(data.value as FooterContent);
+      } else {
+        setFooterContent(defaultFooterContent);
+      }
     } catch (error) {
       console.error("Error fetching footer content:", error);
+      setFooterContent(defaultFooterContent);
+    } finally {
+      setLoading(false);
     }
   };
+
+  // Show nothing while loading to prevent flash
+  if (loading) {
+    return (
+      <footer className="border-t border-border/30 bg-background">
+        <div className="max-w-6xl mx-auto px-4 py-12">
+          <div className="h-64 flex items-center justify-center">
+            <div className="animate-pulse text-muted-foreground text-sm">Loading...</div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
+  // Use loaded content or fallback
+  const content = footerContent || defaultFooterContent;
 
   return (
     <footer className="border-t border-border/30 bg-background">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Footer Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {footerContent.columns.map((column, index) => (
+          {content.columns.map((column, index) => (
             <div key={index}>
               <h3 className="font-semibold text-foreground mb-4">{column.title}</h3>
               <ul className="space-y-2.5">
@@ -110,10 +137,10 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="pt-8 border-t border-border/30">
           <p className="text-sm text-muted-foreground mb-4 max-w-3xl">
-            {footerContent.description}
+            {content.description}
           </p>
           <p className="text-sm text-muted-foreground">
-            {footerContent.copyright}
+            {content.copyright}
           </p>
         </div>
       </div>
